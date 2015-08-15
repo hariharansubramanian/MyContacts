@@ -18,43 +18,34 @@ public class ContactListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
-        ListView listView= (ListView) findViewById(R.id.contact_list_view);
-        ArrayList<Contact> contactArrayList= new ArrayList<>();
+        ListView listView = (ListView) findViewById(R.id.contact_list_view);
+        ArrayList<Contact> contactArrayList = new ArrayList<>();
         listView.setAdapter(new ContactsAdapter(contactArrayList));
 
-        Contact contact1=new Contact();
+        Contact contact1 = new Contact();
         contact1.setmName("Hari");
-        contactArrayList.add(contact1);
-
+        for (int i = 0; i < 30; i++) {
+            contactArrayList.add(contact1);
+        }
     }
 
-    private class ContactsAdapter extends ArrayAdapter<Contact>{
-        ContactsAdapter(ArrayList<Contact> contactArrayList){
-            super(ContactListActivity.this,R.layout.contact_list_row,R.id.contact_row,contactArrayList);
+    private class ContactsAdapter extends ArrayAdapter<Contact> {
+        ContactsAdapter(ArrayList<Contact> contactArrayList) {
+            super(ContactListActivity.this, R.layout.contact_list_row, R.id.contact_row, contactArrayList);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView=super.getView(position, convertView, parent);
+            convertView = super.getView(position, convertView, parent);
 
-            Contact contact=getItem(position);
-            TextView nameTextView= (TextView) convertView.findViewById(R.id.contact_row);
+            Contact contact = getItem(position);
+            TextView nameTextView = (TextView) convertView.findViewById(R.id.contact_row);
             nameTextView.setText(contact.getmName());
 
 
             return convertView;
         }
     }
-
-
-
-
-
-
-
-
-
-
 
 
     @Override
