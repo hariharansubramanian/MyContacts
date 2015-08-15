@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/contact_row"
-        android:text="DUMMY NAME"
+        android:text="DUMMY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/vertical_inner_margin" />  <!--16 + 56=72dp according to Material design margin-->
