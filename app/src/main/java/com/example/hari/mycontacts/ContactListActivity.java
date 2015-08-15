@@ -19,22 +19,24 @@ public class ContactListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
         ListView listView= (ListView) findViewById(R.id.contact_list_view);
-        ArrayList<Contact> contacts= new ArrayList<>();
-        listView.setAdapter(new ContactsAdapter(contacts));
+        ArrayList<Contact> contactArrayList= new ArrayList<>();
+        listView.setAdapter(new ContactsAdapter(contactArrayList));
 
         Contact contact1=new Contact();
         contact1.setmName("Hari");
+        contactArrayList.add(contact1);
 
     }
 
     private class ContactsAdapter extends ArrayAdapter<Contact>{
-        ContactsAdapter(ArrayList<Contact> contacts){
-            super(ContactListActivity.this,R.layout.contact_list_row,R.id.contact_row,contacts);
+        ContactsAdapter(ArrayList<Contact> contactArrayList){
+            super(ContactListActivity.this,R.layout.contact_list_row,R.id.contact_row,contactArrayList);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView=super.getView(position, convertView, parent);
+
             Contact contact=getItem(position);
             TextView nameTextView= (TextView) convertView.findViewById(R.id.contact_row);
             nameTextView.setText(contact.getmName());
