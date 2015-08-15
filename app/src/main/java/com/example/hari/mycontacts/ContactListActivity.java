@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +22,25 @@ public class ContactListActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.contact_list_view);
         ArrayList<Contact> contactArrayList = new ArrayList<>();
         listView.setAdapter(new ContactsAdapter(contactArrayList));
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {  //Show Action bar on up-scroll, Hide on Down-scroll
+            int previousFirstItem = 0;
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (firstVisibleItem > previousFirstItem) {
+                    getSupportActionBar().hide();
+                } else if(firstVisibleItem<previousFirstItem){
+                    getSupportActionBar().show();
+
+                }
+                previousFirstItem=firstVisibleItem;
+            }
+        });
 
         Contact contact1 = new Contact();
         contact1.setmName("Hari");
