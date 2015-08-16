@@ -6,6 +6,8 @@
     <!--removed padding so image view takes full screen-->
 
     <ImageView
+        android:src="@mipmap/IMG"
+        android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
 
