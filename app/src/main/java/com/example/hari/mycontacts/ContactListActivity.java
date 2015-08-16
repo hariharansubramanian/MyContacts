@@ -56,7 +56,7 @@ public class ContactListActivity extends AppCompatActivity {
         });
 
         Contact contact1 = new Contact();
-        contact1.setmName("Hari");
+        contact1.setmName("Hari&Nicky");
         for (int i = 0; i < 30; i++) {
             contactArrayList.add(contact1);
         }

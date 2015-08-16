@@ -5,17 +5,29 @@
     tools:context=".MainActivity">
     <!--removed padding so image view takes full screen-->
 
-    <ImageView
-        android:id="@+id/contact_view_image"
-        android:src="@mipmap/IMG"
-        android:scaleType="centerCrop"
+    <RelativeLayout
+        android:id="@+id/header_section"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="200dp">
 
-    <TextView
-        android:id="@+id/contact_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="HARI" />
+        <ImageView
+            android:id="@+id/contact_view_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/IMG" />
+
+        <TextView
+            android:id="@+id/contact_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingLeft="@dimen/vertical_small_margin"
+            android:text="HARI"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@android:color/white" />
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

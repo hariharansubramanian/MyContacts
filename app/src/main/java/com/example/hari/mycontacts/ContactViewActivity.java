@@ -25,8 +25,8 @@ public class ContactViewActivity extends AppCompatActivity {
         int height=point.x;
         int width=point.y;
         //now calculating height for 16:9 ratio for ImageView
-        ImageView iv= (ImageView) findViewById(R.id.contact_view_image);
-        iv.setLayoutParams(new RelativeLayout.LayoutParams(width, (int) ((width*(9.0/16.0)))));
+        RelativeLayout headerSection= (RelativeLayout) findViewById(R.id.header_section);
+        headerSection.setLayoutParams(new RelativeLayout.LayoutParams(width, (int) ((width*(9.0/16.0)))));
         Log.d("ContactView","new height is"+iv.getLayoutParams().height);
 
         Contact contact= (Contact) getIntent().getSerializableExtra(EXTRA);
