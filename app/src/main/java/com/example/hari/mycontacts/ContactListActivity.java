@@ -1,5 +1,6 @@
 package com.example.hari.mycontacts;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,31 +16,42 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ContactListActivity extends AppCompatActivity {
+    private ArrayList<Contact> contactArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
         ListView listView = (ListView) findViewById(R.id.contact_list_view);
-        ArrayList<Contact> contactArrayList = new ArrayList<>();
+        contactArrayList = new ArrayList<>();
         listView.setAdapter(new ContactsAdapter(contactArrayList));
+
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {  //Show Action bar on up-scroll, Hide on Down-scroll
             int previousFirstItem = 0;
 
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-
             }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (firstVisibleItem > previousFirstItem) {
                     getSupportActionBar().hide();
-                } else if(firstVisibleItem<previousFirstItem){
+                } else if (firstVisibleItem < previousFirstItem) {
                     getSupportActionBar().show();
 
                 }
-                previousFirstItem=firstVisibleItem;
+                previousFirstItem = firstVisibleItem;
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() { //On clicking Contact, Send clicked Contact to next Activity
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Contact contact = contactArrayList.get(position);
+                Intent i = new Intent(ContactListActivity.this, ContactViewActivity.class);
+                i.putExtra(ContactViewActivity.EXTRA, contact);
+                startActivity(i);
             }
         });
 

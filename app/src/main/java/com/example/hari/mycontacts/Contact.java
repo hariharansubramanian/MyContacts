@@ -1,9 +1,11 @@
 package com.example.hari.mycontacts;
 
+import java.io.Serializable;
+
 /**
  * Created by Nicky on 8/14/2015.
  */
-public class Contact {
+public class Contact implements Serializable {
     private String mName;
 
     public String getmName() {
