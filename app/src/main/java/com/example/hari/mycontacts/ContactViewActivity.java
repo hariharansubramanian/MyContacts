@@ -10,26 +10,31 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 public class ContactViewActivity extends AppCompatActivity {
-    public static final String EXTRA="CVA_Contact";
+    public static final String EXTRA = "CVA_Contact";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_view);
         //get screen height and width
-        Display display=getWindowManager().getDefaultDisplay();
-        Point point=new Point();
+        Display display = getWindowManager().getDefaultDisplay();
+        Point point = new Point();
         display.getSize(point);
-        int height=point.x;
-        int width=point.y;
-        //now calculating height for 16:9 ratio for ImageView
-        RelativeLayout headerSection= (RelativeLayout) findViewById(R.id.header_section);
-        headerSection.setLayoutParams(new RelativeLayout.LayoutParams(width, (int) ((width*(9.0/16.0)))));
-        Log.d("ContactView","new height is"+iv.getLayoutParams().height);
+        int height = point.x;
+        int width = point.y;
 
-        Contact contact= (Contact) getIntent().getSerializableExtra(EXTRA);
+        //now calculating height for 16:9 ratio for RelativeLayout containing Contact image and name
+        RelativeLayout headerSection = (RelativeLayout) findViewById(R.id.header_section);
+        headerSection.setLayoutParams(new RelativeLayout.LayoutParams(width, (int) ((width * (9.0 / 16.0)))));
+
+        //Setting Toolbar as Action bar.
+        android.support.v7.widget.Toolbar toolBar = (android.support.v7.widget.Toolbar) findViewById(R.id.contact_view_toolbar);
+        setSupportActionBar(toolBar);
+
+        Contact contact = (Contact) getIntent().getSerializableExtra(EXTRA);
         TextView contactName = (TextView) findViewById(R.id.contact_name);
         contactName.setText(contact.getmName());
 
