@@ -29,15 +29,15 @@
 
     </RelativeLayout>
 
-    <!--implementing android's inbuilt support toolbar that supports older versions <ToolBar> is for lollipop-->
-
+<!--using Android.support.widget.Toolbar because ToolBar is suported for Lollipop only-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/contact_view_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@android:color/holo_red_dark">
-
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:fitsSystemWindows="true"
+        />
+    <!-- fitSystemWindows brings toolbar below other stuff-->
 
 
 </RelativeLayout>

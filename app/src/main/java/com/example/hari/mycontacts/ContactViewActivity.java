@@ -30,9 +30,11 @@ public class ContactViewActivity extends AppCompatActivity {
         RelativeLayout headerSection = (RelativeLayout) findViewById(R.id.header_section);
         headerSection.setLayoutParams(new RelativeLayout.LayoutParams(width, (int) ((width * (9.0 / 16.0)))));
 
-        //Setting Toolbar as Action bar.
+        //Setting Toolbar as Action bar. Doing this because Toolbar can be fully customized.
         android.support.v7.widget.Toolbar toolBar = (android.support.v7.widget.Toolbar) findViewById(R.id.contact_view_toolbar);
         setSupportActionBar(toolBar);
+
+        toolBar.inflateMenu(R.menu.menu_main);
 
         Contact contact = (Contact) getIntent().getSerializableExtra(EXTRA);
         TextView contactName = (TextView) findViewById(R.id.contact_name);
