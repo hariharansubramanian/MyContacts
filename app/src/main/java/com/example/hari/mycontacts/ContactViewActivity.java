@@ -10,6 +10,7 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -41,17 +42,21 @@ public class ContactViewActivity extends AppCompatActivity {
         toolBar.setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                int id=item.getItemId();
-                if(id==R.id.contact_view_edit){
-                    Log.d("EDIT","Clicked on Edit icon");
+                int id = item.getItemId();
+                if (id == R.id.contact_view_edit) {
+                    Log.d("EDIT", "Clicked on Edit icon");
                     return true;
                 }
 
 
                 return false;
             }
-        } );
-        toolBar.inflateMenu(R.menu.menu_contact_view); // inflate menu for custom look instead of setSupportActionBar(toolbar);
+        });
+        // inflate menu for custom look instead of setSupportActionBar(toolbar);
+        toolBar.inflateMenu(R.menu.menu_contact_view);
+
+        ListView contactNumEmails = (ListView) findViewById(R.id.list_view_emails_and_numbers);
+
 
 
 

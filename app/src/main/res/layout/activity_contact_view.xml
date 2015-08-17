@@ -1,8 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".ContactViewActivity">
     <!--removed padding so image view takes full screen-->
 
@@ -28,21 +29,24 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@android:color/white" />
 
-    </RelativeLayout>
 
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/contact_view_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        android:fitsSystemWindows="true"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        />
-    <!--using Android.support.widget.Toolbar because ToolBar is supported for Lollipop only-->
-    <!-- popupTheme=ThemeOverlay.App.Compat.Light makes menu popup appear light-->
-    <!-- fitSystemWindows brings toolbar below other stuff-->
-
-
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/contact_view_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:minHeight="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        <!--using Android.support.widget.Toolbar because ToolBar is supported for Lollipop only-->
+        <!-- popupTheme=ThemeOverlay.App.Compat.Light makes menu popup appear light-->
+        <!-- fitSystemWindows brings toolbar below other stuff-->
 </RelativeLayout>
+
+    <ListView
+        android:id="@+id/list_view_emails_and_numbers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="100"/>
+
+</LinearLayout>
