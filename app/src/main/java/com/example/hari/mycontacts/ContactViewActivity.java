@@ -55,7 +55,7 @@ public class ContactViewActivity extends AppCompatActivity {
         // inflate menu for custom look instead of setSupportActionBar(toolbar);
         toolBar.inflateMenu(R.menu.menu_contact_view);
 
-        ListView contactNumEmails = (ListView) findViewById(R.id.list_view_emails_and_numbers);
+        ListView listView = (ListView) findViewById(R.id.list_view_emails_and_numbers);
 
 
 
