@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainActivity">
+    tools:context=".ContactViewActivity">
     <!--removed padding so image view takes full screen-->
 
     <RelativeLayout
@@ -30,7 +30,7 @@
 
     </RelativeLayout>
 
-<!--using Android.support.widget.Toolbar because ToolBar is suported for Lollipop only-->
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/contact_view_toolbar"
         android:layout_width="match_parent"
@@ -40,6 +40,7 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         />
+    <!--using Android.support.widget.Toolbar because ToolBar is supported for Lollipop only-->
     <!-- popupTheme=ThemeOverlay.App.Compat.Light makes menu popup appear light-->
     <!-- fitSystemWindows brings toolbar below other stuff-->
 

@@ -1,6 +1,8 @@
 package com.example.hari.mycontacts;
 
+import android.annotation.TargetApi;
 import android.graphics.Point;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,30 +13,49 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
+import android.widget.Toolbar.OnMenuItemClickListener;
 
 public class ContactViewActivity extends AppCompatActivity {
     public static final String EXTRA = "CVA_Contact";
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_view);
+
         //get screen height and width
         Display display = getWindowManager().getDefaultDisplay();
         Point point = new Point();
         display.getSize(point);
-        int height = point.x;
-        int width = point.y;
+        int width = point.x;
+        int height = point.y;
 
-        //now calculating height for 16:9 ratio for RelativeLayout containing Contact image and name
+        //now calculating height for RelativeLayout containing Contact image and name with 16:9 ratio
         RelativeLayout headerSection = (RelativeLayout) findViewById(R.id.header_section);
         headerSection.setLayoutParams(new RelativeLayout.LayoutParams(width, (int) ((width * (9.0 / 16.0)))));
 
         //Setting Toolbar as Action bar. Doing this because Toolbar can be fully customized.
         android.support.v7.widget.Toolbar toolBar = (android.support.v7.widget.Toolbar) findViewById(R.id.contact_view_toolbar);
-        setSupportActionBar(toolBar);
+        //on Menu Item Click
+        toolBar.setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int id=item.getItemId();
+                if(id==R.id.contact_view_edit){
+                    Log.d("EDIT","Clicked on Edit icon");
+                    return true;
+                }
 
-        toolBar.inflateMenu(R.menu.menu_main);
+
+                return false;
+            }
+        } );
+        toolBar.inflateMenu(R.menu.menu_contact_view); // inflate menu for custom look instead of setSupportActionBar(toolbar);
+
+
+
+
 
         Contact contact = (Contact) getIntent().getSerializableExtra(EXTRA);
         TextView contactName = (TextView) findViewById(R.id.contact_name);
