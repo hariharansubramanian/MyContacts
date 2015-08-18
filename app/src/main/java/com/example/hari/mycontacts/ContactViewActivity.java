@@ -94,6 +94,15 @@ public class ContactViewActivity extends AppCompatActivity {
             }
         }
 
+        // if First Phone number or First Email, used to add drawable Call or email icon in getView
+        private boolean isFirstItem(int position) {
+            if (position == 0 || position == phoneNumbers.size()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         @Override
         public int getCount() {       //tells BaseAdapter how many rows to populate
             return emails.size() + phoneNumbers.size();
@@ -110,14 +119,17 @@ public class ContactViewActivity extends AppCompatActivity {
 
             TextView textViewEmailAndNum = (TextView) convertView.findViewById(R.id.contact_view_email_num_textview);
             textViewEmailAndNum.setText(items);
-
             ImageView iv = (ImageView) convertView.findViewById(R.id.imageview_emailOrNum);
-            if (isPhoneNumber(position)) {
-                iv.setImageResource(R.drawable.ic_call);
-            } else {
-                iv.setImageResource(R.drawable.ic_email);
-            }
+            if (isFirstItem(position)) {
 
+
+
+                if (isPhoneNumber(position)) {
+                    iv.setImageResource(R.drawable.ic_call);
+                } else {
+                    iv.setImageResource(R.drawable.ic_email);
+                }
+            }
             return convertView;
         }
 

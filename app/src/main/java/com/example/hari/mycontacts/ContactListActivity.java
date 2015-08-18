@@ -58,11 +58,16 @@ public class ContactListActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-//note: did not declare new array list for both
+
         Contact contact1 = new Contact();
         contact1.setmName("Hariharan");
         contact1.setEmails("hariharan1990.s@gmail.com");
+        contact1.setEmails("echo-.-@hotmail.com");
+        contact1.setPhoneNumbers("+91 9886306699");
         contact1.setPhoneNumbers("+91 9916217018");
+        contact1.setPhoneNumbers("+971 8451972");
+        contact1.setPhoneNumbers("+971 5842907");
+
 
         for (int i = 0; i < 30; i++) {
             contactArrayList.add(contact1);
