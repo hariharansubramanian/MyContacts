@@ -85,6 +85,15 @@ public class ContactViewActivity extends AppCompatActivity {
 
         }
 
+        public boolean isPhoneNumber(int position) {
+            if (position < phoneNumbers.size()) {
+                return true;
+            } else {
+                return false;
+
+            }
+        }
+
         @Override
         public int getCount() {       //tells BaseAdapter how many rows to populate
             return emails.size() + phoneNumbers.size();
@@ -102,8 +111,12 @@ public class ContactViewActivity extends AppCompatActivity {
             TextView textViewEmailAndNum = (TextView) convertView.findViewById(R.id.contact_view_email_num_textview);
             textViewEmailAndNum.setText(items);
 
-            ImageView iv = findViewById(R.id.imageview_emailOrNum);
-            
+            ImageView iv = (ImageView) convertView.findViewById(R.id.imageview_emailOrNum);
+            if (isPhoneNumber(position)) {
+                iv.setImageResource(R.drawable.ic_call);
+            } else {
+                iv.setImageResource(R.drawable.ic_email);
+            }
 
             return convertView;
         }
@@ -117,13 +130,14 @@ public class ContactViewActivity extends AppCompatActivity {
         //Note:ArrayList<> Emails is after the phonenumbers ArrayList
         //So if position selected is greater than phonenumbers.size(), must take element from emails ArrayList
         public Object getItem(int position) {
-            if (position < phoneNumbers.size()) {
+            if (isPhoneNumber(position)) {
                 return phoneNumbers.get(position);
             } else {
                 return emails.get(position - phoneNumbers.size());
             }
 
         }
+
     }
 
     @Override
