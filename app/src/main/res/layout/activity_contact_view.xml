@@ -44,7 +44,7 @@
 </RelativeLayout>
 
     <ListView
-        android:id="@+id/list_view_emails_and_numbers"
+        android:id="@+id/list_view_fields"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="100"/>

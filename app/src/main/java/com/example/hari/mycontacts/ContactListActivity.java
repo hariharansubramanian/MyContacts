@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ContactListActivity extends AppCompatActivity {
     private ArrayList<Contact> contactArrayList;
@@ -22,11 +23,14 @@ public class ContactListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
-        ListView listView = (ListView) findViewById(R.id.contact_list_view);
+
         contactArrayList = new ArrayList<>();
+
+        ListView listView = (ListView) findViewById(R.id.contact_list_view);
         listView.setAdapter(new ContactsAdapter(contactArrayList));
 
-        listView.setOnScrollListener(new AbsListView.OnScrollListener() {  //Show Action bar on up-scroll, Hide on Down-scroll
+        //Show Action bar on up-scroll, Hide on Down-scroll
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             int previousFirstItem = 0;
 
             @Override
@@ -54,9 +58,12 @@ public class ContactListActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+//note: did not declare new array list for both
         Contact contact1 = new Contact();
-        contact1.setmName("Hari&Nicky");
+        contact1.setmName("Hariharan");
+        contact1.setEmails("hariharan1990.s@gmail.com");
+        contact1.setPhoneNumbers("+91 9916217018");
+
         for (int i = 0; i < 30; i++) {
             contactArrayList.add(contact1);
         }
