@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -100,6 +101,9 @@ public class ContactViewActivity extends AppCompatActivity {
 
             TextView textViewEmailAndNum = (TextView) convertView.findViewById(R.id.contact_view_email_num_textview);
             textViewEmailAndNum.setText(items);
+
+            ImageView iv = findViewById(R.id.imageview_emailOrNum);
+            
 
             return convertView;
         }
