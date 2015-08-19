@@ -1,10 +1,13 @@
 package com.example.hari.mycontacts;
 
 import android.annotation.TargetApi;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.graphics.Palette;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -18,12 +21,11 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class ContactViewActivity extends AppCompatActivity {
     public static final String EXTRA = "CVA_Contact";
+    private int relativeColor;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -46,7 +48,7 @@ public class ContactViewActivity extends AppCompatActivity {
         //Setting Toolbar as Action bar. Doing this because Toolbar can be fully customized.
         android.support.v7.widget.Toolbar toolBar = (android.support.v7.widget.Toolbar) findViewById(R.id.contact_view_toolbar);
 
-        //on Menu Item Click
+        //on Toolbar Menu Item Click
         toolBar.setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -70,6 +72,14 @@ public class ContactViewActivity extends AppCompatActivity {
         //ListView for Emails and Numbers Using BaseAdapter
         ListView listView = (ListView) findViewById(R.id.list_view_fields);
         listView.setAdapter(new FieldsAdapter(contact.getPhoneNumbers(), contact.getEmails()));
+
+        //Using Palette to get a suitable int color based on given Bitmap, Dynamic Color
+        //passing image resource to be decoded into bitmap colors
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img2);
+        //generate a Pallete by giving in the decoded bitmap to get a relative color
+        Palette palette = Palette.generate(bitmap,24);
+        //Using palette and VibrantSwatch to generate a relative rgb int color
+       relativeColor = palette.getDarkVibrantSwatch().getRgb();
 
     }
 
@@ -123,13 +133,13 @@ public class ContactViewActivity extends AppCompatActivity {
             if (isFirstItem(position)) {
 
 
-
                 if (isPhoneNumber(position)) {
                     iv.setImageResource(R.drawable.ic_call);
                 } else {
                     iv.setImageResource(R.drawable.ic_email);
                 }
             }
+            iv.setColorFilter(relativeColor);
             return convertView;
         }
 
