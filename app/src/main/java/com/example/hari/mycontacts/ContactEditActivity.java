@@ -2,11 +2,14 @@ package com.example.hari.mycontacts;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -22,12 +25,29 @@ public class ContactEditActivity extends AppCompatActivity {
 
         EditText editName = (EditText) findViewById(R.id.edit_name);
         editName.setText(contact.getmName());
+
         addToSection(R.id.phonenumber_sectionLinearlayout, contact.getPhoneNumbers());
         addToSection(R.id.email_sectionLinearlayout, contact.getEmails());
 
+        TextView addNewPhoneNumber = (TextView) findViewById(R.id.add_new_phoneNumber);
+
+        addNewPhoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            Log.d("ADD:","PhoneNumber");
+            }
+        });
+        TextView addNewEmail = (TextView) findViewById(R.id.add_new_email);
+        addNewEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("ADD:", "EMAIL");
+            }
+        });
+
 
     }
-
+    //create new edit text fields,sets layoutparam and text for each value in ArrayList<> email or ArrayList<> phoennumbers
     private void addToSection(int sectionID, ArrayList<String> values) {
         LinearLayout section = (LinearLayout) findViewById(sectionID);
         for (int i = 0; i < values.size(); i++) {
