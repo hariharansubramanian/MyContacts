@@ -3,6 +3,7 @@ package com.example.hari.mycontacts;
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -147,7 +148,7 @@ public class ContactViewActivity extends AppCompatActivity {
             if (palette.getDarkVibrantSwatch() != null) {
                 iv.setColorFilter(relativeColor);
             } else {
-                iv.setColorFilter(R.color.primary);
+                iv.setColorFilter(getResources().getColor(R.color.primary));
             }
             return convertView;
         }
