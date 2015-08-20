@@ -6,4 +6,8 @@
     <string name="ContactViewActivity">ContactViewActivity</string>
     <string name="edit_contact">Edit Contact</string>
     <string name="title_activity_contact_edit">ContactEditActivity</string>
+    <string name="name_label">Name:</string>
+    <string name="phonenumber_label">Phone:</string>
+    <string name="email_label">Email Adress:</string>
+    <string name="Add_new">Add New</string>
 </resources>
