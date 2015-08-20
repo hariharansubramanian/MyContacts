@@ -17,14 +17,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/NoActionBar"
             android:name=".ContactViewActivity"
-            android:label="@string/ContactViewActivity" >
+            android:label="@string/ContactViewActivity"
+            android:theme="@style/NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ContactEditActivity"
+            android:label="@string/title_activity_contact_edit" >
         </activity>
     </application>
 

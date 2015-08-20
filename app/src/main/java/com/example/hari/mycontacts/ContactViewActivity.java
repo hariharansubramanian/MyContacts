@@ -1,6 +1,7 @@
 package com.example.hari.mycontacts;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -26,8 +27,9 @@ import java.util.ArrayList;
 
 public class ContactViewActivity extends AppCompatActivity {
     public static final String EXTRA = "CVA_Contact";
-    Palette palette;
+    private Palette palette;
     private int relativeColor;
+    private Contact contact;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -56,6 +58,9 @@ public class ContactViewActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.contact_view_edit) {
+                    Intent i=new Intent(ContactViewActivity.this,ContactEditActivity.class);
+                    i.putExtra(ContactEditActivity.EXTRA,contact);
+                    startActivity(i);
                     Log.d("EDIT", "Clicked on Edit icon");
                     return true;
                 }
@@ -67,7 +72,7 @@ public class ContactViewActivity extends AppCompatActivity {
         // inflate menu for custom look instead of setSupportActionBar(toolbar);
         toolBar.inflateMenu(R.menu.menu_contact_view);
 
-        Contact contact = (Contact) getIntent().getSerializableExtra(EXTRA);
+        contact = (Contact) getIntent().getSerializableExtra(EXTRA);
         TextView contactName = (TextView) findViewById(R.id.contact_name);
         contactName.setText(contact.getmName());
 
