@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 public class ContactViewActivity extends AppCompatActivity {
     public static final String EXTRA = "CVA_Contact";
+    Palette palette;
     private int relativeColor;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -75,11 +76,15 @@ public class ContactViewActivity extends AppCompatActivity {
 
         //Using Palette to get a suitable int color based on given Bitmap, Dynamic Color
         //passing image resource to be decoded into bitmap colors
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img2);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img);
         //generate a Pallete by giving in the decoded bitmap to get a relative color
-        Palette palette = Palette.generate(bitmap,24);
+        palette = Palette.generate(bitmap);
         //Using palette and VibrantSwatch to generate a relative rgb int color
-       relativeColor = palette.getDarkVibrantSwatch().getRgb();
+        //TODO
+        //must do a null check on palette because it does not get a vibrantswatch sometimes
+        if (palette.getDarkVibrantSwatch()!=null) {
+            relativeColor = palette.getDarkVibrantSwatch().getRgb();
+        }
 
     }
 
@@ -139,7 +144,11 @@ public class ContactViewActivity extends AppCompatActivity {
                     iv.setImageResource(R.drawable.ic_email);
                 }
             }
-            iv.setColorFilter(relativeColor);
+            if (palette.getDarkVibrantSwatch() != null) {
+                iv.setColorFilter(relativeColor);
+            } else {
+                iv.setColorFilter(R.color.primary);
+            }
             return convertView;
         }
 

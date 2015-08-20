@@ -4,7 +4,7 @@
     android:layout_height="@dimen/row_height">
 
     <ImageView
-        android:background="@android:color/holo_red_dark"
+
         android:id="@+id/imageview_emailOrNum"
         android:layout_width="@dimen/avatar_size"
         android:layout_height="@dimen/avatar_size"
