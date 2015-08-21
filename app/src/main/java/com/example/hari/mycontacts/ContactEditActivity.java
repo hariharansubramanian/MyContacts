@@ -16,19 +16,38 @@ import java.util.ArrayList;
 
 public class ContactEditActivity extends AppCompatActivity {
     public static final String EXTRA = "CEA_EXTRA";
+    private EditText editName;
+    private Contact contact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_edit);
 
-        Contact contact = (Contact) getIntent().getSerializableExtra(EXTRA);
+        contact = (Contact) getIntent().getSerializableExtra(EXTRA);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.contact_edit_toolbar);
         toolbar.setTitle(getResources().getString(R.string.edit_contact));
         toolbar.setNavigationIcon(R.drawable.ic_done);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("ToolbarClick:", "Navigation icon Clicked");
 
-        EditText editName = (EditText) findViewById(R.id.edit_name);
+                contact.setmName(editName.getText().toString());
+                contact.setPhoneNumbers(getSectionItems(R.id.phonenumber_sectionLinearlayout));
+                contact.setEmails(getSectionItems(R.id.email_sectionLinearlayout));
+                for (int i = 0; i <contact.getPhoneNumbers().size() ; i++) {
+
+
+                    Log.d("PhoneNumbers:", contact.getPhoneNumbers().get(i));
+                }
+                finish();
+
+            }
+        });
+
+        editName = (EditText) findViewById(R.id.edit_name);
         editName.setText(contact.getmName());
 
         addToSection(R.id.phonenumber_sectionLinearlayout, contact.getPhoneNumbers());
@@ -38,8 +57,8 @@ public class ContactEditActivity extends AppCompatActivity {
         addNewPhoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Log.d("ADD:","PhoneNumber");
-                addNewToSection(R.id.phonenumber_sectionLinearlayout,"");
+                Log.d("ADD:", "PhoneNumber");
+                addNewToSection(R.id.phonenumber_sectionLinearlayout, "");
             }
         });
         TextView addNewEmail = (TextView) findViewById(R.id.add_new_email);
@@ -47,14 +66,32 @@ public class ContactEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("ADD:", "EMAIL");
-                addNewToSection(R.id.email_sectionLinearlayout,"");
+                addNewToSection(R.id.email_sectionLinearlayout, "");
             }
         });
 
 
     }
+
+    //To ArrayList Strings of items under phonenumber section or email section of linearlayout
+    private ArrayList<String> getSectionItems(int sectionID) {
+
+        ArrayList<String> childItems = new ArrayList<>();
+        LinearLayout section = (LinearLayout) findViewById(sectionID);
+
+        for (int i = 0; i < section.getChildCount(); i++) {
+
+            childItems.add(section.getChildAt(i).toString());
+
+            Log.d("Adding to ArrayList:",section.getChildAt(i).toString());
+
+
+        }
+        return childItems;
+    }
+
     //create new edit text field,sets layoutparam and sets text = String value
-    private void addNewToSection(int sectionID,String value) {
+    private void addNewToSection(int sectionID, String value) {
         LinearLayout section = (LinearLayout) findViewById(sectionID);
         EditText et = new EditText(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
