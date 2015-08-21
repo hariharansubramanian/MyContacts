@@ -2,7 +2,6 @@
 <resources>
 
     <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowTranslucentStatus">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

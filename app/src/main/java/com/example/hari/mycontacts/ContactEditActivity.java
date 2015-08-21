@@ -2,6 +2,7 @@ package com.example.hari.mycontacts;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +23,8 @@ public class ContactEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact_edit);
 
         Contact contact = (Contact) getIntent().getSerializableExtra(EXTRA);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.contact_edit_toolbar);
+        toolbar.setTitle(getResources().getString(R.string.edit_contact));
 
         EditText editName = (EditText) findViewById(R.id.edit_name);
         editName.setText(contact.getmName());
