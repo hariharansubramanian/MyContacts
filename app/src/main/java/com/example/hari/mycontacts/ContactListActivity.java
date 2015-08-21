@@ -75,8 +75,8 @@ public class ContactListActivity extends AppCompatActivity {
     }
 
     private class ContactsAdapter extends ArrayAdapter<Contact> {
-        ContactsAdapter(ArrayList<Contact> contactArrayList) {
-            super(ContactListActivity.this, R.layout.contact_list_row, R.id.contact_row, contactArrayList);
+        ContactsAdapter(ArrayList<Contact> contacts) {
+            super(ContactListActivity.this, R.layout.contact_list_row, R.id.contact_row, contacts);
         }
 
         @Override

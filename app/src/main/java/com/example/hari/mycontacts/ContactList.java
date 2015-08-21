@@ -8,12 +8,12 @@ import java.util.ArrayList;
 public class ContactList extends ArrayList {
     private static ContactList sContactInstance=null;
 
-    private ContactList(){};
+    private ContactList(){}
 
     public static ContactList getContactInstance() {
 
         if(sContactInstance==null){
-            new ContactList();
+            sContactInstance=new ContactList();
         }
         return sContactInstance;
     }
