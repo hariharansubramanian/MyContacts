@@ -23,8 +23,10 @@ public class ContactEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact_edit);
 
         Contact contact = (Contact) getIntent().getSerializableExtra(EXTRA);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.contact_edit_toolbar);
         toolbar.setTitle(getResources().getString(R.string.edit_contact));
+        toolbar.setNavigationIcon(R.drawable.ic_done);
 
         EditText editName = (EditText) findViewById(R.id.edit_name);
         editName.setText(contact.getmName());
