@@ -28,13 +28,13 @@ public class ContactEditActivity extends AppCompatActivity {
 
         addToSection(R.id.phonenumber_sectionLinearlayout, contact.getPhoneNumbers());
         addToSection(R.id.email_sectionLinearlayout, contact.getEmails());
-
         TextView addNewPhoneNumber = (TextView) findViewById(R.id.add_new_phoneNumber);
 
         addNewPhoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             Log.d("ADD:","PhoneNumber");
+                addNewToSection(R.id.phonenumber_sectionLinearlayout,"");
             }
         });
         TextView addNewEmail = (TextView) findViewById(R.id.add_new_email);
@@ -42,11 +42,22 @@ public class ContactEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("ADD:", "EMAIL");
+                addNewToSection(R.id.email_sectionLinearlayout,"");
             }
         });
 
 
     }
+    //create new edit text field,sets layoutparam and sets text = String value
+    private void addNewToSection(int sectionID,String value) {
+        LinearLayout section = (LinearLayout) findViewById(sectionID);
+        EditText et = new EditText(this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        et.setLayoutParams(lp);
+        et.setText(value);
+        section.addView(et);
+    }
+
     //create new edit text fields,sets layoutparam and text for each value in ArrayList<> email or ArrayList<> phoennumbers
     private void addToSection(int sectionID, ArrayList<String> values) {
         LinearLayout section = (LinearLayout) findViewById(sectionID);

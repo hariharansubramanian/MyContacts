@@ -86,8 +86,7 @@ public class ContactViewActivity extends AppCompatActivity {
         //generate a Pallete by giving in the decoded bitmap to get a relative color
         palette = Palette.generate(bitmap);
         //Using palette and VibrantSwatch to generate a relative rgb int color
-        //TODO
-        //must do a null check on palette because it does not get a vibrantswatch sometimes
+        //must do a null check on getDarkVibrantSwatch() because it does not get a vibrantswatch sometimes
         if (palette.getDarkVibrantSwatch()!=null) {
             relativeColor = palette.getDarkVibrantSwatch().getRgb();
         }
