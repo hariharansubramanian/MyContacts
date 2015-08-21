@@ -17,14 +17,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ContactListActivity extends AppCompatActivity {
-    private ArrayList<Contact> contactArrayList;
+    private ContactList contactArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
-        contactArrayList = new ArrayList<>();
+        contactArrayList = ContactList.getContactInstance();
 
         ListView listView = (ListView) findViewById(R.id.contact_list_view);
         listView.setAdapter(new ContactsAdapter(contactArrayList));
@@ -52,7 +52,7 @@ public class ContactListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() { //On clicking Contact, Send clicked Contact to next Activity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Contact contact = contactArrayList.get(position);
+                Contact contact = (Contact) contactArrayList.get(position);
                 Intent i = new Intent(ContactListActivity.this, ContactViewActivity.class);
                 i.putExtra(ContactViewActivity.EXTRA, contact);
                 startActivity(i);
