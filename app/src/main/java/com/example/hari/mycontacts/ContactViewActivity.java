@@ -58,8 +58,8 @@ public class ContactViewActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.contact_view_edit) {
-                    Intent i=new Intent(ContactViewActivity.this,ContactEditActivity.class);
-                    i.putExtra(ContactEditActivity.EXTRA,contact);
+                    Intent i = new Intent(ContactViewActivity.this, ContactEditActivity.class);
+                    i.putExtra(ContactEditActivity.EXTRA, contact);
                     startActivity(i);
                     Log.d("EDIT", "Clicked on Edit icon");
                     return true;
@@ -72,7 +72,9 @@ public class ContactViewActivity extends AppCompatActivity {
         // inflate menu for custom look instead of setSupportActionBar(toolbar);
         toolBar.inflateMenu(R.menu.menu_contact_view);
 
-        contact = (Contact) getIntent().getSerializableExtra(EXTRA);
+        int contactPosition=getIntent().getIntExtra(EXTRA,0);
+       contact= (Contact) ContactList.getContactInstance().get(contactPosition);
+
         TextView contactName = (TextView) findViewById(R.id.contact_name);
         contactName.setText(contact.getmName());
 

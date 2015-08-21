@@ -54,7 +54,7 @@ public class ContactListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Contact contact = (Contact) contactArrayList.get(position);
                 Intent i = new Intent(ContactListActivity.this, ContactViewActivity.class);
-                i.putExtra(ContactViewActivity.EXTRA, contact);
+                i.putExtra(ContactViewActivity.EXTRA, position);
                 startActivity(i);
             }
         });
