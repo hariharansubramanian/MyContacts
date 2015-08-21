@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,7 +38,7 @@ public class ContactEditActivity extends AppCompatActivity {
                 contact.setmName(editName.getText().toString());
                 contact.setPhoneNumbers(getSectionItems(R.id.phonenumber_sectionLinearlayout));
                 contact.setEmails(getSectionItems(R.id.email_sectionLinearlayout));
-
+                Toast.makeText(ContactEditActivity.this,"Saved contact",Toast.LENGTH_LONG).show();
                 finish();
 
             }
