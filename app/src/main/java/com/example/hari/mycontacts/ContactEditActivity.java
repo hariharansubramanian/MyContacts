@@ -37,11 +37,7 @@ public class ContactEditActivity extends AppCompatActivity {
                 contact.setmName(editName.getText().toString());
                 contact.setPhoneNumbers(getSectionItems(R.id.phonenumber_sectionLinearlayout));
                 contact.setEmails(getSectionItems(R.id.email_sectionLinearlayout));
-                for (int i = 0; i <contact.getPhoneNumbers().size() ; i++) {
 
-
-                    Log.d("PhoneNumbers:", contact.getPhoneNumbers().get(i));
-                }
                 finish();
 
             }
@@ -80,10 +76,10 @@ public class ContactEditActivity extends AppCompatActivity {
         LinearLayout section = (LinearLayout) findViewById(sectionID);
 
         for (int i = 0; i < section.getChildCount(); i++) {
+            EditText et= (EditText) section.getChildAt(i);
+            childItems.add(et.getText().toString());
 
-            childItems.add(section.getChildAt(i).toString());
-
-            Log.d("Adding to ArrayList:",section.getChildAt(i).toString());
+            Log.d("Adding to ArrayList:",childItems.get(i));
 
 
         }
