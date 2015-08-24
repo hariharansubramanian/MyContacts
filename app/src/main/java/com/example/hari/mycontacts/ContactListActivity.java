@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class ContactListActivity extends AppCompatActivity {
     private ContactList contactArrayList;
+    private ContactsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,8 @@ public class ContactListActivity extends AppCompatActivity {
         contactArrayList = ContactList.getContactInstance();
 
         ListView listView = (ListView) findViewById(R.id.contact_list_view);
-        listView.setAdapter(new ContactsAdapter(contactArrayList));
+        mAdapter = new ContactsAdapter(contactArrayList);
+        listView.setAdapter(mAdapter);
 
         //Show Action bar on up-scroll, Hide on Down-scroll
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -51,24 +53,23 @@ public class ContactListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() { //On clicking Contact, Send clicked Contact to next Activity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Contact contact = (Contact) contactArrayList.get(position);
+                Contact contact = (Contact) contactArrayList.getContactInstance().get(position);
                 Intent i = new Intent(ContactListActivity.this, ContactViewActivity.class);
                 i.putExtra(ContactViewActivity.EXTRA, position);
                 startActivity(i);
             }
         });
-
-        Contact contact1 = new Contact();
-        contact1.setmName("Hariharan");
-        contact1.setEmails("hariharan1990.s@gmail.com");
-        contact1.setEmails("echo-.-@hotmail.com");
-        contact1.setPhoneNumbers("+91 9886306699");
-        contact1.setPhoneNumbers("+91 9916217018");
-        contact1.setPhoneNumbers("+971 8451972");
-        contact1.setPhoneNumbers("+971 5842907");
-
-
         for (int i = 0; i < 30; i++) {
+
+
+            Contact contact1 = new Contact();
+            contact1.setmName("Hariharan");
+            contact1.setEmails("hariharan1990.s@gmail.com");
+            contact1.setEmails("echo-.-@hotmail.com");
+            contact1.setPhoneNumbers("+91 9886306699");
+            contact1.setPhoneNumbers("+91 9916217018");
+            contact1.setPhoneNumbers("+971 8451972");
+            contact1.setPhoneNumbers("+971 5842907");
             contactArrayList.add(contact1);
         }
     }
@@ -82,7 +83,7 @@ public class ContactListActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = super.getView(position, convertView, parent);
 
-            Contact contact = getItem(position);
+            Contact contact = (Contact) ContactList.getContactInstance().get(position);
             TextView nameTextView = (TextView) convertView.findViewById(R.id.contact_row);
             nameTextView.setText(contact.getmName());
 
@@ -91,6 +92,11 @@ public class ContactListActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
