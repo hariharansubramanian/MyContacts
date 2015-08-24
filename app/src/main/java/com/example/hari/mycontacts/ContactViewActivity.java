@@ -29,6 +29,7 @@ public class ContactViewActivity extends AppCompatActivity {
     private Palette palette;
     private int relativeColor;
     private Contact contact;
+    private int contactPosition;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -58,7 +59,7 @@ public class ContactViewActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 if (id == R.id.contact_view_edit) {
                     Intent i = new Intent(ContactViewActivity.this, ContactEditActivity.class);
-                    i.putExtra(ContactEditActivity.EXTRA, contact);
+                    i.putExtra(ContactEditActivity.EXTRA,contactPosition);
                     startActivity(i);
                     Log.d("EDIT", "Clicked on Edit icon");
                     return true;
@@ -71,7 +72,7 @@ public class ContactViewActivity extends AppCompatActivity {
         // inflate menu for custom look instead of setSupportActionBar(toolbar);
         toolBar.inflateMenu(R.menu.menu_contact_view);
         //gets position of object of ContactList<> from previous activity
-        int contactPosition=getIntent().getIntExtra(EXTRA,0);
+        contactPosition=getIntent().getIntExtra(EXTRA,0);
        contact= (Contact) ContactList.getContactInstance().get(contactPosition);
 
         TextView contactName = (TextView) findViewById(R.id.contact_name);
@@ -93,6 +94,7 @@ public class ContactViewActivity extends AppCompatActivity {
         }
 
     }
+    private void updateUI(){}
 
     //Custom List View Adapter extending BaseAdapter and implement the 4 default functions getCount(),getView(),getItemId(),getItem()
     private class FieldsAdapter extends BaseAdapter {
@@ -176,10 +178,11 @@ public class ContactViewActivity extends AppCompatActivity {
         }
 
     }
-
-    protected void onResume(){
+//update UI, on returning from ContactEditActivity
+    @Override
+    protected void onResume() {
         super.onResume();
-        Log.d("On Resume:","Returned back to ContactViewActivity");
+        Log.d("On Resume:", "Returned back to ContactViewActivity");
     }
 
     @Override

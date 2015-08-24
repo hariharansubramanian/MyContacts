@@ -19,13 +19,15 @@ public class ContactEditActivity extends AppCompatActivity {
     public static final String EXTRA = "CEA_EXTRA";
     private EditText editName;
     private Contact contact;
+    private int contactPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_edit);
 
-        contact = (Contact) getIntent().getSerializableExtra(EXTRA);
+        contactPosition =getIntent().getIntExtra(EXTRA,0);
+        contact= (Contact) ContactList.getContactInstance().get(contactPosition);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.contact_edit_toolbar);
         toolbar.setTitle(getResources().getString(R.string.edit_contact));
