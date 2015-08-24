@@ -22,6 +22,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class ContactViewActivity extends AppCompatActivity {
@@ -30,6 +32,8 @@ public class ContactViewActivity extends AppCompatActivity {
     private int relativeColor;
     private Contact contact;
     private int contactPosition;
+    private TextView contactName;
+    private FieldsAdapter mAdapter;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -59,7 +63,7 @@ public class ContactViewActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 if (id == R.id.contact_view_edit) {
                     Intent i = new Intent(ContactViewActivity.this, ContactEditActivity.class);
-                    i.putExtra(ContactEditActivity.EXTRA,contactPosition);
+                    i.putExtra(ContactEditActivity.EXTRA, contactPosition);
                     startActivity(i);
                     Log.d("EDIT", "Clicked on Edit icon");
                     return true;
@@ -72,15 +76,16 @@ public class ContactViewActivity extends AppCompatActivity {
         // inflate menu for custom look instead of setSupportActionBar(toolbar);
         toolBar.inflateMenu(R.menu.menu_contact_view);
         //gets position of object of ContactList<> from previous activity
-        contactPosition=getIntent().getIntExtra(EXTRA,0);
-       contact= (Contact) ContactList.getContactInstance().get(contactPosition);
+        contactPosition = getIntent().getIntExtra(EXTRA, 0);
+        contact = (Contact) ContactList.getContactInstance().get(contactPosition);
 
-        TextView contactName = (TextView) findViewById(R.id.contact_name);
-        contactName.setText(contact.getmName());
+        contactName = (TextView) findViewById(R.id.contact_name);
+
 
         //ListView for Emails and Numbers Using BaseAdapter
         ListView listView = (ListView) findViewById(R.id.list_view_fields);
-        listView.setAdapter(new FieldsAdapter(contact.getPhoneNumbers(), contact.getEmails()));
+        mAdapter = new FieldsAdapter(contact.getPhoneNumbers(), contact.getEmails());
+        listView.setAdapter(mAdapter);
 
         //Using Palette to get a suitable int color based on given Bitmap, Dynamic Color
         //passing image resource to be decoded into bitmap colors
@@ -89,12 +94,17 @@ public class ContactViewActivity extends AppCompatActivity {
         palette = Palette.generate(bitmap);
         //Using palette and VibrantSwatch to generate a relative rgb int color
         //must do a null check on getDarkVibrantSwatch() because it does not get a vibrantswatch sometimes
-        if (palette.getDarkVibrantSwatch()!=null) {
+        if (palette.getDarkVibrantSwatch() != null) {
             relativeColor = palette.getDarkVibrantSwatch().getRgb();
         }
+updateUI();
+    }
+
+    private void updateUI() {
+        contactName.setText(contact.getmName());
+        mAdapter.notifyDataSetChanged();
 
     }
-    private void updateUI(){}
 
     //Custom List View Adapter extending BaseAdapter and implement the 4 default functions getCount(),getView(),getItemId(),getItem()
     private class FieldsAdapter extends BaseAdapter {
@@ -178,11 +188,13 @@ public class ContactViewActivity extends AppCompatActivity {
         }
 
     }
-//update UI, on returning from ContactEditActivity
+
+    //update UI, on returning from ContactEditActivity
     @Override
     protected void onResume() {
         super.onResume();
         Log.d("On Resume:", "Returned back to ContactViewActivity");
+        updateUI();
     }
 
     @Override
