@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -71,7 +70,7 @@ public class ContactViewActivity extends AppCompatActivity {
         });
         // inflate menu for custom look instead of setSupportActionBar(toolbar);
         toolBar.inflateMenu(R.menu.menu_contact_view);
-
+        //gets position of object of ContactList<> from previous activity
         int contactPosition=getIntent().getIntExtra(EXTRA,0);
        contact= (Contact) ContactList.getContactInstance().get(contactPosition);
 
@@ -176,6 +175,11 @@ public class ContactViewActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    protected void onResume(){
+        super.onResume();
+        Log.d("On Resume:","Returned back to ContactViewActivity");
     }
 
     @Override

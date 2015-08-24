@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ContactListActivity extends AppCompatActivity {
     private ContactList contactArrayList;
